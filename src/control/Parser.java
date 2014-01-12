@@ -4,7 +4,6 @@
  */
 package control;
 
-import javax.swing.JOptionPane;
 import model.Game;
 
 /**
@@ -27,11 +26,8 @@ public class Parser
 
     }
 
-    /**
-     *
-     * @param word
-     * @return
-     */
+    //Behövs den här? väldigt lik validate answer..
+    // Och man kan använda andra metoder för att täcka funktionaliteten
     public static boolean validateUserInput(String word)
     {
         String input = cleanUp(word);
@@ -84,7 +80,7 @@ public class Parser
         }
     }
 
-    public static boolean verifyNoEmptyFieldsRegistering(String first, String last, String pass, String passRetype)
+    public static boolean verifyNoEmptyFields(String first, String last, String pass, String passRetype)
     {
         if (first.isEmpty() || last.isEmpty() || pass.isEmpty() || passRetype.isEmpty())
         {
@@ -94,21 +90,22 @@ public class Parser
 
     }
 
-    public static boolean verifyNoEmptyFieldNewWordList(String[] listFields)
-    {
-
-        for (String string : listFields)
-        {
-            if (string.isEmpty())
-            {
-                JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
-                return false;
-            }
-
-        }
-        return true;
-    }
-
+//    public boolean validateUserName(String name)
+//    {
+//
+//        String user = cleanUp(name);
+//
+//        if((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user)))
+//        {
+//
+//            return true;
+//        }
+//        else
+//        {
+//            return false;
+//        }
+//
+//    }
     public boolean validateAnswer(String answer, int index)
     {
 
@@ -120,6 +117,8 @@ public class Parser
 
         return false;
     }
+
+    
 
     public boolean passwordIsCorrect(String user, String password)
     {
