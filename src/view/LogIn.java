@@ -7,6 +7,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import static java.awt.Frame.HAND_CURSOR;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,6 +63,17 @@ public class LogIn extends JPanel
 
         //LoginListener
         LoginListener listener = new LoginListener(name, password, logIn, newUser, main);
+
+        password.addKeyListener(new KeyAdapter()
+        {
+            public void keyPressed(KeyEvent evt)
+            {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    main.goFromLogin();
+                }
+            }
+        });
 
         //adding ActionListeners
         logIn.addActionListener(listener);

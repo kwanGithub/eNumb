@@ -96,13 +96,13 @@ public class LoginListener implements ActionListener
 
         if (choice == logIn)
         {
-            /*
-             String userName = name.getSelectedItem().toString();
-             String userPass = password.getText();
 
-             verifyUserAndPassword(userName, userPass);
-             password.setText("");
-             */
+            String userName = name.getSelectedItem().toString();
+            String userPass = password.getText();
+
+            verifyUserAndPassword(userName, userPass);
+            password.setText("");
+
             main.goFromLogin();
 
         }
