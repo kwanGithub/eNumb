@@ -18,6 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import org.netbeans.validation.api.builtin.stringvalidation.StringValidators;
+import org.netbeans.validation.api.ui.ValidationGroup;
+import org.netbeans.validation.api.ui.swing.ValidationPanel;
 
 /**
  *
@@ -32,6 +35,8 @@ public class AddNewSection extends JPanel
     private final JTextField yWord1, yWord2, yWord3, yWord4, yWord5, yWord6, yWord7, yWord8, yWord9, yWord10;
     private final JButton saveWords;
     private final Enumb main;
+    private final ValidationPanel panel;
+    private final ValidationGroup group;
 
     public AddNewSection(Enumb jf)
     {
@@ -58,6 +63,7 @@ public class AddNewSection extends JPanel
         leftContainer = new JPanel(new GridLayout(12, 2, 5, 5));
         numberContainer = new JPanel(new GridLayout(12, 1, 0, 5));
         weekNamePanel = new JPanel();
+        panel = new ValidationPanel();
 
         //New textfields
         addWeekName = new JTextField();
@@ -98,7 +104,7 @@ public class AddNewSection extends JPanel
 
         main = jf;
 
-        AddNewSectionListener listener = new AddNewSectionListener(saveWords, main, inputField);
+        AddNewSectionListener listener = new AddNewSectionListener(saveWords, addWeekName, main, inputField);
 
         saveWords.addActionListener(listener);
 
@@ -250,6 +256,28 @@ public class AddNewSection extends JPanel
         leftContainer.add(yWord9);
         leftContainer.add(xWord10);
         leftContainer.add(yWord10);
+
+        group = panel.getValidationGroup();
+        group.add(xWord1, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord2, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord3, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord4, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord5, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord6, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord7, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord8, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord9, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(xWord10, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord1, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord2, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord3, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord4, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord5, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord6, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord7, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord8, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord9, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
+        group.add(yWord10, StringValidators.REQUIRE_NON_EMPTY_STRING, StringValidators.maxLength(25));
 
         add(Box.createRigidArea(new Dimension(700, 200)));
         add(mainContainer);

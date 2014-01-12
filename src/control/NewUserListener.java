@@ -67,7 +67,7 @@ public class NewUserListener implements ActionListener
      */
     public boolean addNewUser(String first, String last, String pass, String pass2)
     {
-        if (!Parser.verifyNoEmptyFields(first, last, pass, pass2))
+        if (!Parser.verifyNoEmptyFieldsRegistering(first, last, pass, pass2))
         {
             JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
             return false;
