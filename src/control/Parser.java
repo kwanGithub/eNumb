@@ -4,9 +4,11 @@
  */
 package control;
 
+import javax.swing.JOptionPane;
 import model.Game;
 
 /**
+ * This class controls and validates inputs before sending it to model
  *
  * @author kevin
  */
@@ -26,8 +28,12 @@ public class Parser
 
     }
 
-    //Behövs den här? väldigt lik validate answer..
-    // Och man kan använda andra metoder för att täcka funktionaliteten
+    /**
+     * Validates input if input passes the rules we have set up it will return true
+     *
+     * @param word inputtext
+     * @return ture or false
+     */
     public static boolean validateUserInput(String word)
     {
         String input = cleanUp(word);
@@ -38,6 +44,12 @@ public class Parser
         return false;
     }
 
+    /**
+     * chekcs the input field if it has more than 24 characthers if not will return true
+     *
+     * @param word inputfield
+     * @return true or false
+     */
     public static boolean maxLetters(String word)
     {
         if (word.length() > 24 || word.length() < 1)
@@ -47,6 +59,12 @@ public class Parser
         return true;
     }
 
+    /**
+     * checks the inputfiled for numbers returns true if the field doenst have any numbers
+     *
+     * @param input inputfield
+     * @return true or false
+     */
     public static boolean lookForNumbers(String input)
     {
         String numbers = "1234567890";
@@ -61,6 +79,12 @@ public class Parser
         return true;
     }
 
+    /**
+     * sets the input text to lowercase and trims it
+     *
+     * @param s inputfield
+     * @return inputfield cleaned and trimed
+     */
     public static String cleanUp(String s)
     {
 
@@ -68,6 +92,13 @@ public class Parser
 
     }
 
+    /**
+     * validtates the regrestation password twice, returns true if pass1 and pass2 are equal
+     *
+     * @param password pass1 on regrestation field
+     * @param retype pass2 on regrestation field
+     * @return true if they are equal else false
+     */
     public static boolean passwordCheck(String password, String retype)
     {
         if (password.equals(retype))
@@ -80,7 +111,16 @@ public class Parser
         }
     }
 
-    public static boolean verifyNoEmptyFields(String first, String last, String pass, String passRetype)
+    /**
+     * Verfiyt if regresttaions field are not empty
+     *
+     * @param first firstname field
+     * @param last lastname field
+     * @param pass password field
+     * @param passRetype password field 2
+     * @return returs true if the fields arent empty
+     */
+    public static boolean verifyNoEmptyFieldsRegistering(String first, String last, String pass, String passRetype)
     {
         if (first.isEmpty() || last.isEmpty() || pass.isEmpty() || passRetype.isEmpty())
         {
@@ -90,22 +130,34 @@ public class Parser
 
     }
 
-//    public boolean validateUserName(String name)
-//    {
-//
-//        String user = cleanUp(name);
-//
-//        if((maxLetters(user) && lookForNumbers(name) && game.usernameAvailable(user)))
-//        {
-//
-//            return true;
-//        }
-//        else
-//        {
-//            return false;
-//        }
-//
-//    }
+    /**
+     * verifty fields are not empty when u create a new list
+     *
+     * @param listFields list of the words the user wants to save
+     * @return returns ture if the field are not empty else false
+     */
+    public static boolean verifyNoEmptyFieldNewWordList(String[] listFields)
+    {
+
+        for (String string : listFields)
+        {
+            if (string.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "Alla fält måste vara ifyllda");
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    /**
+     * Validates answer field ingame
+     *
+     * @param answer input field
+     * @param index the word u want to check
+     * @return true or false
+     */
     public boolean validateAnswer(String answer, int index)
     {
 
@@ -118,8 +170,13 @@ public class Parser
         return false;
     }
 
-    
-
+    /**
+     * Matches the usersname with password
+     *
+     * @param user username
+     * @param password password
+     * @return true if match
+     */
     public boolean passwordIsCorrect(String user, String password)
     {
         //game.setUser(user);
@@ -127,6 +184,13 @@ public class Parser
 
     }
 
+    /**
+     * chekcs if the username is availble
+     *
+     * @param first first name
+     * @param last lastname
+     * @return
+     */
     public boolean userExists(String first, String last)
     {
         String f = cleanUp(first);
@@ -145,6 +209,12 @@ public class Parser
         return game;
     }
 
+    /**
+     * sets string with first capital letter
+     *
+     * @param name string
+     * @return string with the first letter set to capital
+     */
     public String firstLetterCapital(String name)
     {
 

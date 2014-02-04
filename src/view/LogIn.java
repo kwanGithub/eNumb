@@ -7,6 +7,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import static java.awt.Frame.HAND_CURSOR;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +37,7 @@ public class LogIn extends JPanel
     private final JButton logIn, newUser;
     private final Enumb main;
     private final JLayeredPane jPane;
+    private LoginListener listener;
 
     public LogIn(Enumb jf) throws IOException
     {
@@ -60,7 +63,18 @@ public class LogIn extends JPanel
         main = jf;
 
         //LoginListener
-        LoginListener listener = new LoginListener(name, password, logIn, newUser, main);
+        listener = new LoginListener(name, password, logIn, newUser, main);
+
+        password.addKeyListener(new KeyAdapter()
+        {
+            public void keyPressed(KeyEvent evt)
+            {
+                if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+                {
+                    listener.verifyUserAndPassword(name.getItemAt(name.getSelectedIndex()), password.getText());
+                }
+            }
+        });
 
         //adding ActionListeners
         logIn.addActionListener(listener);

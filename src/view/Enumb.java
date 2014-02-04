@@ -12,7 +12,6 @@ package view;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.io.IOException;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -54,7 +53,6 @@ public final class Enumb extends JFrame
         result = new Result(this);
         newUser = new NewUser(this);
         addNewSection = new AddNewSection(this);
-        
 
         //addNewLanguage = new AddNewLanguage(this);
         JFrame();
@@ -68,6 +66,7 @@ public final class Enumb extends JFrame
         cont.add(levelOfDifficulty, "4");
         cont.add(result, "6");
         cont.add(newUser, "7");
+        cont.add(addNewSection, "8");
         add(cont);//adding to extended JFrame
 
         cl.show(cont, "1");
@@ -103,9 +102,9 @@ public final class Enumb extends JFrame
 
     public void goFromMenuToChosenLanguage()
     {
-        
         cl.show(cont, "3");
         setPreferredSize(new Dimension(1330, 900));
+
         chosenLanguage.fillList();
         chosenLanguage.updateUI();
         pack();
@@ -127,6 +126,7 @@ public final class Enumb extends JFrame
         cont.add(gameRun, "5");
         cl.show(cont, "5");
         setPreferredSize(new Dimension(1330, 900));
+        gameRun.setFocusOnField();
         gameRun.updateUI();
         pack();
         setLocationRelativeTo(null);
@@ -136,6 +136,7 @@ public final class Enumb extends JFrame
     {
         cl.show(cont, "6");
         setPreferredSize(new Dimension(1330, 900));
+        result.updateLabels();
         result.updateUI();
         pack();
         setLocationRelativeTo(null);
@@ -153,11 +154,11 @@ public final class Enumb extends JFrame
 
     public void goFromChosenLanguageToAddNewSection()
     {
-        chosenLanguage.removeCenterPanel();
-        chosenLanguage.updateUI();
-        chosenLanguage.add(addNewSection);
-        
-        
+        cl.show(cont, "8");
+        setPreferredSize(new Dimension(1330, 900));
+        addNewSection.updateUI();
+        pack();
+        setLocationRelativeTo(null);
     }
 
     public void logOutUser()

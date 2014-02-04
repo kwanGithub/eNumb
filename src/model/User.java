@@ -6,6 +6,7 @@
 package model;
 
 /**
+ * Our user class for the projet
  *
  * @author kevin
  */
@@ -16,6 +17,13 @@ public class User
     private int Highscore;
     private int TotalScore;
 
+    /**
+     * constructor
+     *
+     * @param firstname userfirstname
+     * @param lastname userlastname
+     * @param password user password
+     */
     public User(String firstname, String lastname, String password)
     {
         this.firstname = firstname;
@@ -24,6 +32,11 @@ public class User
         this.username = firstname + " " + lastname;
     }
 
+    /**
+     * arraylist for the user info
+     *
+     * @param s string array
+     */
     public User(String[] s)
     {
         firstname = s[0];

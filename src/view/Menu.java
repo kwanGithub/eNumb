@@ -3,22 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//realShit
 package view;
 
+import java.awt.*;
+import javax.swing.*;
 import control.MenuListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.OverlayLayout;
 
 /**
  *
@@ -89,8 +79,7 @@ public class Menu extends JPanel
         centerPanel.setPreferredSize(new Dimension(790, 890));
         topHeading.setPreferredSize(new Dimension(790, 500));
 
-        bubblePanel.setPreferredSize(new Dimension(700, 250));
-        mascotLabel.setPreferredSize(new Dimension(200, 300));
+        bubblePanel.setPreferredSize(new Dimension(800, 280));
         mascotBubble.setPreferredSize(new Dimension(500, 280));
 
         flagLabel.setPreferredSize(new Dimension(250, 150));
@@ -103,8 +92,10 @@ public class Menu extends JPanel
         logOut.setPreferredSize(new Dimension(200, 40));
 
         //Background settings.
-        containerE.setBackground(new Color(17, 54, 56));
-        containerW.setBackground(new Color(184, 101, 0));
+        containerE.setBackground(new Color(0, 194, 198));
+        containerW.setBackground(new Color(0, 194, 198));
+        centerPanel.setBackground(new Color(20, 184, 188));
+        bubblePanel.setBackground(new Color(20, 184, 188));
         topPanel.setBackground(new Color(184, 101, 0));
         bottomPanel.setBackground(new Color(17, 54, 56));
         chooseLanguage.setBackground(new Color(255, 255, 255));
@@ -122,8 +113,6 @@ public class Menu extends JPanel
         addNewLanguage.setBorder(BorderFactory.createRaisedBevelBorder());
         help.setBorder(BorderFactory.createRaisedBevelBorder());
         logOut.setBorder(BorderFactory.createRaisedBevelBorder());
-        containerW.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
-        containerE.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.BLACK));
 
         //Font settings
         chooseLanguage.setFont(font);
@@ -138,15 +127,15 @@ public class Menu extends JPanel
         bubblePanel.setLayout(new OverlayLayout(bubblePanel));
 
         //Adding to bubblePanel
-        bubblePanel.add(Box.createRigidArea(new Dimension(390, 200)));
+        bubblePanel.add(Box.createRigidArea(new Dimension(573, 200)));
         bubblePanel.add(mascotBubble);
 
         //Adding to centerPanel
         centerPanel.add(Box.createRigidArea(new Dimension(790, 120)));
         centerPanel.add(topHeading);
-        centerPanel.add(Box.createRigidArea(new Dimension(90, 80)));
+        centerPanel.add(Box.createRigidArea(new Dimension(700, -30)));
         centerPanel.add(bubblePanel);
-
+        
         //Adding to WEST container.
         containerW.add(Box.createRigidArea(new Dimension(250, 5)));
         containerW.add(flagLabel);
@@ -166,8 +155,6 @@ public class Menu extends JPanel
         containerE.add(mascotLabel);
 
         //Adding to main container.
-        add(topPanel, BorderLayout.PAGE_START);
-        add(bottomPanel, BorderLayout.PAGE_END);
         add(centerPanel, BorderLayout.CENTER);
         add(containerW, BorderLayout.LINE_START);
         add(containerE, BorderLayout.LINE_END);

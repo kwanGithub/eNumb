@@ -32,6 +32,7 @@ public class LoginListener implements ActionListener
     private Game game;
 
     /**
+     * Constructor
      *
      * @param name List of registerd users
      * @param password Enterd password
@@ -96,15 +97,14 @@ public class LoginListener implements ActionListener
 
         if (choice == logIn)
         {
-            /*
-             String userName = name.getSelectedItem().toString();
-             String userPass = password.getText();
 
-             verifyUserAndPassword(userName, userPass);
-             password.setText("");
-             */
-            main.goFromLogin();
+            String userName = name.getSelectedItem().toString();
+            String userPass = password.getText();
 
+            verifyUserAndPassword(userName, userPass);
+            password.setText("");
+
+           // main.goFromLogin();
         }
         else if (choice == newUser)
         {

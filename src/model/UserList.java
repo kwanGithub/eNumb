@@ -8,12 +8,14 @@ package model;
 import java.util.ArrayList;
 
 /**
+ * Userlist to store the users
  *
  * @author kevin
  */
 public class UserList
 {
 
+    // arraylist to store users
     private ArrayList<User> userlist;
 
     public UserList()
@@ -22,6 +24,11 @@ public class UserList
 
     }
 
+    /**
+     * adds user
+     *
+     * @param s string array
+     */
     public void addUser(String[] s)
     {
         userlist.add(new User(s[0], s[1], s[2]));
@@ -58,11 +65,21 @@ public class UserList
         return null;
     }
 
+    /**
+     * removes users from arraylist
+     *
+     * @param i wich user to remove
+     */
     public void removUser(int i)
     {
         userlist.remove(i);
     }
 
+    /**
+     * shows a list of users
+     *
+     * @return list with all teh names
+     */
     public String[] showList()
     {
 
@@ -84,17 +101,25 @@ public class UserList
 
         return listOfNames;
     }
- 
 
-    public boolean nameAvailable(String username) {
-        
-        for(User u : userlist ){
-            if(u.getUsername().equals(username)){
+    /**
+     * Check if the username is availble
+     *
+     * @param username username
+     * @return true if user the user doesnt exits
+     */
+    public boolean nameAvailable(String username)
+    {
+
+        for (User u : userlist)
+        {
+            if (u.getUsername().equals(username))
+            {
                 return false;
             }
         }
-          
-                return true;
+
+        return true;
     }
 
 }

@@ -6,6 +6,7 @@
 package model;
 
 /**
+ * Word class for proj
  *
  * @author Felix
  */
@@ -14,6 +15,13 @@ public class Word
 
     private final String swedishWord, foreginWord, language;
 
+    /**
+     * constructor
+     *
+     * @param sw swedish word
+     * @param fw foregin word
+     * @param lang word language
+     */
     public Word(String sw, String fw, String lang)
     {
 

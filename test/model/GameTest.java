@@ -43,6 +43,7 @@ public class GameTest
     {
 
         game = new Game();
+        game.setChosenLanguage("engelska");
 
     }
 
@@ -101,112 +102,151 @@ public class GameTest
             "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
             "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat", "katt", "cat",
         };
-        
-        game.getListOfLanguageSections("engelska");
+        game.setChosenLanguage("engelska");
+        game.getListOfLanguageSections();
         game.createWordList("vecka 1", "engelska", words);
 
         assertNotNull(game.getWordList("vecka 1"));
 
     }
-    
-    
+
     @Test
-    public void testGettingListOfLangauges(){
-        
-        assertNotNull(game.getListOfLanguages());  
-    }
-    
-    @Test
-    public void testSettingListOfLanguages(){
-        
-        String[] expResult = new String[]{"engelska", "spanska", "franska"};
-        
-        game.setLanguageList(expResult);
-        
-        String[] result = game.getListOfLanguages();
-        
-    }
-    
-    @Test
-    public void testGettingListOfEnglishWordLists(){
-        
-        String[] expResult = new String[]{"hund", "vecka 1", "words"};
-        
-        String[] result = game.getListOfLanguageSections("engelska");
-        
-        Assert.assertArrayEquals(expResult, result);
-    }
-    
-    
-    @Test
-    public void testIfInputWordMatchesTranslation(){
-        
-        game.getListOfLanguageSections("engelska");
-        game.setListandLevel("words",  1);
-        game.setUser("adrian ronsten");
-        
-        assertTrue( game.checkWord(1, "cat") );
-        
-    }
-    
-    @Test
-    public void testGettingWord(){
-        
-        game.getListOfLanguageSections("engelska");
-        game.setListandLevel("words",  1);
-        game.setUser("adrian ronsten");
-        
-        String[] expResult = new String[]{"katt", "cat", "engelska"};
-        
-        String[] result = game.getWord(1);
-        
-        Assert.assertArrayEquals(expResult, result);
-    }
-    
-    
-    @Test
-    public void testPlayingTheGameGettingAndSavingScore(){
-        
-        game.getListOfLanguageSections("engelska");
-        game.setListandLevel("words",  1);
-        game.setUser("adrian ronsten");
-        
-        for (int i = 0; i < 10; i++) {
-            game.checkWord(i, "cat");
-        }
-        
-        game.saveScore(0);     
-        
-        int result = game.getUser("adrian ronsten").getHightScore();
-        
-        int expResult = 100;
-        
-        assertEquals(expResult, result);
-        
+    public void testGettingListOfLangauges()
+    {
+
+        assertNotNull(game.getListOfLanguages());
     }
 
     @Test
-    public void testGettingRandomAnswers(){
-       
-        
-        game.getListOfLanguageSections("engelska");
-        game.setListandLevel("words",  1);
+    public void testSettingListOfLanguages()
+    {
+
+        String[] expResult = new String[]
+        {
+            "engelska", "spanska", "franska"
+        };
+
+        game.setLanguageList(expResult);
+
+        String[] result = game.getListOfLanguages();
+
+    }
+
+    @Test
+    public void testGettingListOfEnglishWordLists()
+    {
+
+        game.setTempLang("engelska");
+        game.getListOfLanguageSections();
         game.setUser("adrian ronsten");
-        
+        game.setChosenLanguage("engelska");
+
+        game.setWordlist("words");
+        game.setLevel(1);
+
+        String[] expResult = new String[]
+        {
+            "hund", "testeng", "vecka 1", "words"
+        };
+
+        String[] result = game.getListOfLanguageSections();
+
+        Assert.assertArrayEquals(expResult, result);
+    }
+
+    @Test
+    public void testIfInputWordMatchesTranslation()
+    {
+
+        game.setTempLang("engelska");
+        game.getListOfLanguageSections();
+        game.setUser("adrian ronsten");
+        game.setChosenLanguage("engelska");
+
+        game.setWordlist("words");
+        game.setLevel(1);
+
+        assertTrue(game.checkWord(1, "cat"));
+
+    }
+
+    @Test
+    public void testGettingWord()
+    {
+
+        game.setTempLang("engelska");
+        game.getListOfLanguageSections();
+        game.setUser("adrian ronsten");
+        game.setChosenLanguage("engelska");
+
+        game.setWordlist("words");
+        game.setLevel(1);
+
+        String[] expResult = new String[]
+        {
+            "katt", "cat", "engelska"
+        };
+
+        String[] result = game.getWord(1);
+
+        Assert.assertArrayEquals(expResult, result);
+    }
+
+    @Test
+    public void testPlayingTheGameGettingAndSavingScore()
+    {
+
+        game.getListOfLanguageSections();
+        game.setUser("adrian ronsten");
+        game.setChosenLanguage("engelska");
+
+        game.setWordlist("words");
+        game.setLevel(2);
+
+        for (int i = 0; i < 10; i++)
+        {
+            game.checkWord(i, "cat");
+        }
+
+        game.saveScore(10);
+
+        int result = game.getUser("adrian ronsten").getHightScore();
+
+        int expResult = 100;
+
+        assertEquals(expResult, result);
+
+    }
+
+    @Test
+    public void testGettingRandomAnswers()
+    {
+
+        game.getListOfLanguageSections();
+        game.setUser("adrian ronsten");
+        game.setChosenLanguage("engelska");
+
+        game.setWordlist("words");
+        game.setLevel(1);
+
+        game.setWordlist("words");
+        game.setLevel(1);
+
         String rightAnswer = game.getWord(1)[1];
-        
+
         String a = game.getRandomAnswer(rightAnswer);
         String b = game.getRandomAnswer(rightAnswer);
-                
-        Assert.assertFalse( rightAnswer.equals(b));
-        Assert.assertFalse( rightAnswer.equals(a));
-        
+
+        Assert.assertFalse(rightAnswer.equals(b));
+        Assert.assertFalse(rightAnswer.equals(a));
+
     }
-    
+
     @Test
-    public void testCheckingIfUserNameIsTaken(){
-        
+    public void testCheckingIfUserNameIsTaken()
+    {
+
         assertTrue(game.usernameAvailable("snusmumriken11"));
-          
-    }        
+
+    }
 }

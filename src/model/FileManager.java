@@ -5,13 +5,14 @@
  */
 package model;
 
-import java.util.*;
-import java.io.*;
-
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
+ * This class handles opening, closing, saving the user and word fiels.
  *
  * @author kevin
  */
@@ -25,15 +26,19 @@ public class FileManager
     File userDirectory = new File("data\\users");
     File[] userfiles = userDirectory.listFiles();
     ArrayList<WordList> wordSections;
-    
-    public FileManager(){
-        
+
+    public FileManager()
+    {
+
         wordSections = new ArrayList<>();
-      
+
     }
 
- 
-
+    /**
+     * writng to user file
+     *
+     * @param user User
+     */
     public void writeUserFile(User user)
     {
 
@@ -43,7 +48,7 @@ public class FileManager
         tempFile.getParentFile().getParentFile().mkdirs();
         tempFile.getParentFile().mkdirs();
 
-         PrintWriter writer = null;
+        PrintWriter writer = null;
         try
         {
             writer = new PrintWriter(tempFile);
@@ -52,20 +57,29 @@ public class FileManager
             writer.println(tempUser.getPassword());
             writer.println(tempUser.getHightScore());
             writer.println(tempUser.getTotalScore());
-            
+
         }
-        catch (Exception e){}
-        finally {
-            if (writer != null) {
-            writer.close();
+        catch (Exception e)
+        {
+        }
+        finally
+        {
+            if (writer != null)
+            {
+                writer.close();
             }
         }
 
     }
-    
+
+    /**
+     * Reads userlist file
+     *
+     * @return userlist
+     */
     public UserList readUserFiles()
     {
-      
+
         UserList userlist = new UserList();
         int index = 0;
 
@@ -76,8 +90,12 @@ public class FileManager
         }
         return userlist;
     }
-    
 
+    /**
+     * removes file
+     *
+     * @param fileName file to remove
+     */
     void removeUserFile(String fileName)
     {
 
@@ -85,9 +103,12 @@ public class FileManager
         removeFile.delete();
 
     }
-    
-    
-    
+
+    /**
+     * writes to the wordfile
+     *
+     * @param wl wordlist
+     */
     public void writeWordFile(WordList wl)
     {
 
@@ -112,30 +133,42 @@ public class FileManager
             System.out.println("write failed");
         }
     }
-    
+
+    /**
+     * reas wordlist
+     *
+     * @param filename filename
+     * @return wordlist
+     */
     public WordList readWordFile(File filename)
     {
 
         String name = filename.getName();
-        String newName = name.substring(0, name.length()-4);
-        
+        String newName = name.substring(0, name.length() - 4);
+
         File actualFile = new File("data\\words\\" + filename.getName());
-        
-        WordList words = new WordList(newName);
-        String[] allLines = readLines(actualFile, 21);        
+
+        WordList words = new WordList(newName.toLowerCase().trim());
+        String[] allLines = readLines(actualFile, 21);
         String lang = allLines[0];
-        
+
         for (int i = 1; i < 21; i++)
         {
-            if( i % 2 == 0 ){
-            words.addNewWord(allLines[i-1], allLines[i], lang);
-               // System.out.println(allLines[i-1] + " " + allLines[i]);
+            if (i % 2 == 0)
+            {
+                words.addNewWord(allLines[i - 1], allLines[i], lang);
+                // System.out.println(allLines[i-1] + " " + allLines[i]);
             }
         }
-       
+
         return words;
     }
-    
+
+    /**
+     * removes wordfile
+     *
+     * @param fileName wordfile name
+     */
     public void removeWordFile(String fileName)
     {
 
@@ -143,98 +176,138 @@ public class FileManager
         removeFile.delete();
 
     }
-    
-    
-    
-    private void readAllWordFiles(){
-           
-        for (int i = 0; i < wordfiles.length; i++) {        
-           
-            wordSections.add(readWordFile(wordfiles[i]));  
-            
-        }  
-    }
-    
-    public String[] getListOfWordSections(){
-        
-        readAllWordFiles();
-        
-        String[] sections = new String[wordSections.size()];
-        
-        for (int i = 0; i < wordSections.size(); i++) {
-            
-            sections[i] = wordSections.get(i).getName();  
+
+    /**
+     * read all the wordfiles
+     */
+    private void readAllWordFiles()
+    {
+
+        wordSections = new ArrayList<>();
+
+        for (int i = 0; i < wordfiles.length; i++)
+        {
+
+            wordSections.add(readWordFile(wordfiles[i]));
+
         }
-        
+    }
+
+    /**
+     * get a list of the word sections
+     *
+     * @return the sections
+     */
+    public String[] getListOfWordSections()
+    {
+
+        readAllWordFiles();
+
+        String[] sections = new String[wordSections.size()];
+
+        for (int i = 0; i < wordSections.size(); i++)
+        {
+
+            sections[i] = wordSections.get(i).getName();
+        }
+
         return sections;
     }
 
-    public ArrayList<WordList> getAllListsOfLang(String lang) {
-        
-        readAllWordFiles();
-       
-        ArrayList<WordList> tempList = new ArrayList<>();
-        
-        for(WordList w : wordSections){
-            
-            if(w.getLang().equals(lang)){
-                tempList.add(w);               
-            } 
-        }
-        
-        return tempList;
-        
-    }
-    
+    /**
+     * arralylsit for string wordlists
+     *
+     * @param lang language of the file
+     * @return temp list
+     */
+    public ArrayList<WordList> getAllListsOfLang(String lang)
+    {
 
-    public void writeLangList(String[] langs) {
-       
-        try{
-        PrintWriter writer = new PrintWriter("data//langs.txt");
-            for (int i = 0; i < langs.length; i++) {
+        readAllWordFiles();
+
+        ArrayList<WordList> tempList = new ArrayList<>();
+
+        for (WordList w : wordSections)
+        {
+
+            if (w.getLang().equals(lang))
+            {
+                tempList.add(w);
+            }
+        }
+
+        return tempList;
+
+    }
+
+    /**
+     * wirets to langauge list
+     *
+     * @param langs languate array
+     */
+    public void writeLangList(String[] langs)
+    {
+
+        try
+        {
+            PrintWriter writer = new PrintWriter("data//langs.txt");
+            for (int i = 0; i < langs.length; i++)
+            {
                 writer.println(langs[i]);
             }
             writer.close();
         }
-        catch(Exception e){}
-  
+        catch (Exception e)
+        {
+        }
+
     }
 
-    public String[] readLangFile() {
-        
+    public String[] readLangFile()
+    {
+
         String temp = "";
-        try{
-        scanner = new Scanner(new File("data//langs.txt"));
-        while(scanner.hasNext()){
-            temp += scanner.nextLine() + " ";
+        try
+        {
+            scanner = new Scanner(new File("data//langs.txt"));
+            while (scanner.hasNext())
+            {
+                temp += scanner.nextLine() + " ";
             }
             scanner.close();
-        return temp.split(" ");
+            return temp.split(" ");
         }
-        catch(Exception e){}
+        catch (Exception e)
+        {
+        }
         return null;
     }
-   
-    public String[] readLines(File file, int rows){
-        
+
+    /**
+     * reads and sets the string array
+     *
+     * @param file file name
+     * @param rows how man rows
+     * @return temp array
+     */
+    public String[] readLines(File file, int rows)
+    {
+
         String[] temp = new String[rows];
-        
-        try{
-        scanner = new Scanner(file);   
-            for (int i = 0; i < rows; i++) {
+
+        try
+        {
+            scanner = new Scanner(file);
+            for (int i = 0; i < rows; i++)
+            {
                 temp[i] = scanner.nextLine().trim().toLowerCase();
-            }    
+            }
+            scanner.close();
         }
-        catch(Exception e){
-        }         
+        catch (Exception e)
+        {
+        }
         return temp;
     }
-    
-    
-    
-    
-    
-    
-    
-  
+
 }

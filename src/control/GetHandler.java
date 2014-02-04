@@ -8,19 +8,27 @@ package control;
 import model.Game;
 
 /**
+ * Handlig get request and creating game and parser
  *
  * @author kevin
  */
 public class GetHandler
 {
 
+    Parser parser;
     Game game;
 
     public GetHandler()
     {
-        game = new Game();
+        Parser parser = MainFactory.getParser();
+        game = parser.getGame();
     }
 
+    /**
+     * gets urser list
+     *
+     * @return userlist
+     */
     public String[] getUserList()
 
     {

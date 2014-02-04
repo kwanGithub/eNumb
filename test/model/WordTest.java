@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
+ *s
  * @author Felix
  */
 public class WordTest

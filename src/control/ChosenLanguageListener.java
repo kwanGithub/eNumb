@@ -10,12 +10,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Game;
 import view.Enumb;
 import view.Help;
 
 /**
+ * Handles button and actions for ChosenLanguage view
  *
  * @author kevin
  */
@@ -30,28 +32,36 @@ public class ChosenLanguageListener implements ActionListener
     private Parser parser;
     private Game game;
 
-    public ChosenLanguageListener(JLabel chooseWeekText, JLabel addNewWeekText, 
-            JComboBox section, JButton help, JButton addNewSection, JButton back, 
+    /**
+     * Class consctructor
+     *
+     * @param chooseWeekText Filename for list file
+     * @param section ComboBox JText options
+     * @param help hel pbutton
+     * @param addNewSection NewSection button
+     * @param back back button
+     * @param main enumb view
+     * @param commit commit button
+     */
+    public ChosenLanguageListener(JLabel chooseWeekText,
+            JComboBox section, JButton help, JButton addNewSection, JButton back,
             Enumb main, JButton commit)
     {
         this.chooseWeekText = chooseWeekText;
-        this.addNewWeekText = addNewWeekText;
         this.section = section;
         this.help = help;
         this.addNewSection = addNewSection;
         this.back = back;
         this.main = main;
         this.commit = commit;
-        
+
         parser = MainFactory.getParser();
         game = parser.getGame();
     }
 
-    public ChosenLanguageListener()
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Actions when button is triggerd
+     */
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -63,27 +73,45 @@ public class ChosenLanguageListener implements ActionListener
         }
         else if (choice == back)
         {
-            main.goFromLogin(); 
+            main.goFromLogin();
         }
         else if (choice == commit)
         {
-            game.setWordlist(section.getItemAt(section.getSelectedIndex()));
-            main.goFromChosenLanguageToDifficulty();
+            if (section.getItemAt(section.getSelectedIndex()) != null)
+            {
+                game.setWordlist(section.getItemAt(section.getSelectedIndex()));
+                main.goFromChosenLanguageToDifficulty();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Det verkar inte finnas några gloslistor för det här språket. \nLägg till en ny och försök igen");
+            }
         }
-        else if(choice == addNewSection){
+        else if (choice == addNewSection)
+        {
             main.goFromChosenLanguageToAddNewSection();
         }
     }
-    
-    public void getSectionList(){
-               
-        
-        String[] temp = game.getListOfLanguageSections();
-        for (int i = 0; i < temp.length; i++) {
-            section.addItem(temp[i]);
-            
+
+    /**
+     * Loads the section list with wordLists
+     */
+    public void getSectionList()
+    {
+
+        try
+        {
+            String[] temp = game.getListOfLanguageSections();
+            for (int i = 0; i < temp.length; i++)
+            {
+                section.addItem(temp[i]);
+
+            }
         }
-        
+        catch (Exception e)
+        {
+        }
+
         section.updateUI();
     }
 

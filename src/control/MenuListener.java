@@ -17,6 +17,7 @@ import view.Enumb;
 import view.Help;
 
 /**
+ * controller for menu class
  *
  * @author kevin
  */
@@ -31,7 +32,20 @@ public class MenuListener implements ActionListener
     private JComboBox<String> chooseLanguage;
     private JLabel flagLabel;
 
-    public MenuListener(JTextField newLanguageField, JButton addNewLanguage, 
+    /**
+     * consctructor
+     *
+     * @param newLanguageField language inputfield
+     * @param addNewLanguage button for new language
+     * @param help help button
+     * @param quit quit button
+     * @param next next button
+     * @param logOut logout button
+     * @param main enumb view
+     * @param chooseLanguage combobox for languages
+     * @param flagLabel countryflags
+     */
+    public MenuListener(JTextField newLanguageField, JButton addNewLanguage,
             JButton help, JButton quit, JButton next, JButton logOut, Enumb main,
             JComboBox<String> chooseLanguage, JLabel flagLabel)
     {
@@ -53,6 +67,12 @@ public class MenuListener implements ActionListener
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Checks supported lang
+     *
+     * @param inputLang language name
+     * @return true or false pending of the availbitly of the lang
+     */
     private boolean languageAvailable(String inputLang)
     {
 
@@ -84,6 +104,9 @@ public class MenuListener implements ActionListener
         return langWithCaps;
     }
 
+    /**
+     * sets droopdown menu
+     */
     public void setDropDown()
     {
 
@@ -118,7 +141,7 @@ public class MenuListener implements ActionListener
         if (choice == addNewLanguage)
         {
             // AddNewLanguage.display();
-            String lang = newLanguageField.getText();
+            String lang = Parser.cleanUp(newLanguageField.getText());
             if (languageAvailable(lang))
             {
                 game.addNewLanguage(lang);

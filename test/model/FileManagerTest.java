@@ -116,52 +116,62 @@ public class FileManagerTest
 
         Assert.assertFalse("lol", result.exists());
     }
-    
-    @Test
-    public void testGetListofWordFiles(){
-    
-        String[] expResult = new String[]{"hund", "vecka 1", "words"};
-        
-        String[] result = fm.getListOfWordSections();
-      
-        Assert.assertArrayEquals(expResult, result);
-        
-    }
-    
-    @Test
-    public void testGetListOfLanguages(){
-        
-        String expResult = "engelska";
-        
-        String[] langs = fm.readLangFile();
-        
-        String result = langs[0];
-        
-        Assert.assertEquals(expResult, result);
-    }
-    
-    
-    
-    @Test
-    public void testWriteLangListFile(){
-        
-        fm.writeLangList(new String[]{"engelska", "spanska"});
-        
-        File result = new File("data//langs.txt");
-        
-        Assert.assertTrue(result.exists());
-        
-    }
-           
 
     @Test
-    public void testReadLanguageFile(){
-        
-        String[] expResult = new String[]{"engelska", "spanska"};
-        
-        String[] result = fm.readLangFile();
-        
+    public void testGetListofWordFiles()
+    {
+
+        String[] expResult = new String[]
+        {
+            "hund", "testeng", "vecka 1", "words"
+        };
+
+        String[] result = fm.getListOfWordSections();
+
         Assert.assertArrayEquals(expResult, result);
-        
+
+    }
+
+    @Test
+    public void testGetListOfLanguages()
+    {
+
+        String expResult = "engelska";
+
+        String[] langs = fm.readLangFile();
+
+        String result = langs[0];
+
+        Assert.assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testWriteLangListFile()
+    {
+
+        fm.writeLangList(new String[]
+        {
+            "engelska", "spanska"
+        });
+
+        File result = new File("data//langs.txt");
+
+        Assert.assertTrue(result.exists());
+
+    }
+
+    @Test
+    public void testReadLanguageFile()
+    {
+
+        String[] expResult = new String[]
+        {
+            "engelska", "spanska"
+        };
+
+        String[] result = fm.readLangFile();
+
+        Assert.assertArrayEquals(expResult, result);
+
     }
 }

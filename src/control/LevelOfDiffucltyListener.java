@@ -11,12 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JToolTip;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import model.Game;
 import view.Enumb;
 
 /**
+ * Controller for levelofdiffculty class
  *
  * @author kevin
  */
@@ -28,10 +29,20 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
     private JSlider slider;
     private JButton back, go;
     private Enumb main;
-    private JToolTip toolTipEasy; // Används inte... provar lite för att slippa bakgrunden på tooltipen.
     private int fps;
+    private Parser parser;
+    private Game game;
 
-    public LevelOfDiffucltyListener( JLabel chooseDifficultyText, JSlider slider, JButton back, JButton go, Enumb main, JToolTip toolTipEasy)
+    /**
+     * Class Constructor
+     *
+     * @param chooseDifficultyText Diffculty text
+     * @param slider Slider
+     * @param back backbutton
+     * @param go gobutton
+     * @param main enumb view
+     */
+    public LevelOfDiffucltyListener(JLabel chooseDifficultyText, JSlider slider, JButton back, JButton go, Enumb main)
     {
         this.container = container;
         this.chooseDifficultyText = chooseDifficultyText;
@@ -39,7 +50,10 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
         this.back = back;
         this.go = go;
         this.main = main;
-        this.toolTipEasy = toolTipEasy;
+
+        parser = MainFactory.getParser();
+        game = parser.getGame();
+
     }
 
     public LevelOfDiffucltyListener()
@@ -47,17 +61,21 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * slider events
+     *
+     * @param e event
+     */
     @Override
     public void stateChanged(ChangeEvent e)
     {
         JSlider source = (JSlider) e.getSource();
-        if (!source.getValueIsAdjusting ()) {
+        if (!source.getValueIsAdjusting())
+        {
             fps = (int) source.getValue();
         }
- 
+
     }
-    
-    
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -69,11 +87,17 @@ public class LevelOfDiffucltyListener implements ActionListener, ChangeListener
         }
         else if (choice == go)
         {
-            if(fps == 1|| fps == 0 || fps == 2){
-            main.goFromDifficultyToRunGame(fps);}
-            else{
-            System.out.println("JAHADUDETBLIDDEFEL");
-            }      
+
+            game.setLevel(fps);
+
+            if (fps == 1 || fps == 0 || fps == 2)
+            {
+                main.goFromDifficultyToRunGame(fps);
+            }
+            else
+            {
+                System.out.println("JAHADUDETBLIDDEFEL");
+            }
         }
     }
 

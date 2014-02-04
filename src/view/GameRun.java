@@ -5,26 +5,9 @@
  */
 package view;
 
+import java.awt.*;
 import control.GameRunListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.Timer;
+import javax.swing.*;
 
 /**
  *
@@ -34,7 +17,7 @@ public class GameRun extends JPanel
 {
 
     private Enumb main;
-    private JButton help, menu, choiceNr1, choiceNr2, choiceNr3, choiceNr4, fulKnappSomTasBort, commit;
+    private JButton help, menu, choiceNr1, choiceNr2, choiceNr3, choiceNr4, commit;
     private JPanel leftPanel, rightPanel, buttonPanel, wordToTranslateFieldPanel, bubblePanel, outerButtonPanel, commitButtonPanel;
     private JLabel topLabel, correctNumbersLabel, progressbarLabel, wordToTranslateLabel, translateFieldLabel, tickingTime, mascotLabel, mascotBubble;
     private JTextField wordToTranslate, translateField, correctNumbersField;
@@ -79,7 +62,6 @@ public class GameRun extends JPanel
         choiceNr2 = new JButton("Alternativ 2");
         choiceNr3 = new JButton("Alternativ 3");
         choiceNr4 = new JButton("Alternativ 4");
-        fulKnappSomTasBort = new JButton("TAS BORT");
         commit = new JButton("Svara");
 
         main = jf;
@@ -89,7 +71,7 @@ public class GameRun extends JPanel
 
         //GameRunListener
         listener = new GameRunListener(help, menu, choiceNr1, 
-                choiceNr2, choiceNr3, choiceNr4, fulKnappSomTasBort, main, 
+                choiceNr2, choiceNr3, choiceNr4, main, 
                 wordToTranslate, translateField, correctNumbersField, topLabel, 
                 commit, mascotBubble, progressBar, level);
 
@@ -100,12 +82,8 @@ public class GameRun extends JPanel
         choiceNr4.addActionListener(listener);
         help.addActionListener(listener);
         menu.addActionListener(listener);
-        fulKnappSomTasBort.addActionListener(listener);
         commit.addActionListener(listener);
         
-
-        
-
         //Layout settings.
         setLayout(new BorderLayout());
         buttonPanel.setLayout(new GridLayout(2, 2, 10, 10));
@@ -115,6 +93,8 @@ public class GameRun extends JPanel
         wordToTranslateFieldPanel.setLayout(new FlowLayout());
 
         //Size settings
+        help.setPreferredSize(new Dimension(100,40));
+        menu.setPreferredSize(new Dimension(100,40));
         mascotLabel.setPreferredSize(new Dimension(200, 300));
         mascotBubble.setPreferredSize(new Dimension(500, 230));
         bubblePanel.setPreferredSize(new Dimension(500, 230));
@@ -129,53 +109,62 @@ public class GameRun extends JPanel
         rightPanel.setPreferredSize(new Dimension(250, 900));
         translateFieldLabel.setPreferredSize(new Dimension(700, 50));
         translateField.setPreferredSize(new Dimension(700, 50));
-        wordToTranslateFieldPanel.setPreferredSize(new Dimension(1000, 60));
+        wordToTranslateFieldPanel.setPreferredSize(new Dimension(1000, 80));
         wordToTranslateLabel.setPreferredSize(new Dimension(1000, 50));
         wordToTranslate.setPreferredSize(new Dimension(700, 45));
         progressbarLabel.setPreferredSize(new Dimension(245, 20));
         progressBar.setPreferredSize(new Dimension(240, 40));
         correctNumbersLabel.setPreferredSize(new Dimension(250, 20));
-        correctNumbersField.setPreferredSize(new Dimension(80, 80));
+        correctNumbersField.setPreferredSize(new Dimension(80, 70));
         commitButtonPanel.setPreferredSize(new Dimension(700, 45));
         commit.setPreferredSize(new Dimension(140, 30));
 
-        //buttonPanel.setVisible(false);
+        //Border settings
+        choiceNr1.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr2.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr3.setBorder(BorderFactory.createRaisedBevelBorder());
+        choiceNr4.setBorder(BorderFactory.createRaisedBevelBorder());
+        
         //background settings.
-        buttonPanel.setBackground(Color.YELLOW);
-        outerButtonPanel.setBackground(Color.YELLOW);
-        bubblePanel.setBackground(Color.YELLOW);
-        mascotBubble.setBackground(Color.YELLOW);
-        wordToTranslateFieldPanel.setBackground(Color.YELLOW);
-        commitButtonPanel.setBackground(Color.YELLOW);
-        leftPanel.setBackground(Color.YELLOW);
-        rightPanel.setBackground(Color.RED);
+        leftPanel.setBackground(new Color(254, 255, 185));
+        rightPanel.setBackground(new Color(253, 255, 107));
+        help.setBackground(new Color(240, 240, 240));
+        menu.setBackground(new Color(240, 240, 240));
+        commitButtonPanel.setBackground(new Color(254, 255, 185));
+        bubblePanel.setBackground(new Color(254, 255, 185));
+        wordToTranslateFieldPanel.setBackground(new Color(254, 255, 185));
+        outerButtonPanel.setBackground(new Color(254, 255, 185));
         choiceNr1.setBackground(new Color(240, 240, 240));
         choiceNr2.setBackground(new Color(240, 240, 240));
         choiceNr3.setBackground(new Color(240, 240, 240));
         choiceNr4.setBackground(new Color(240, 240, 240));
-        help.setBackground(new Color(240, 240, 240));
-        menu.setBackground(new Color(240, 240, 240));
+        buttonPanel.setBackground(new Color(254, 255, 185));
         wordToTranslate.setBackground(Color.WHITE);
         correctNumbersField.setBackground(Color.WHITE);
 
-
-       // wordNumber = 5; // Bara som ett visningsexempel för tillfället.
-        correctNumbers = 8; // Bara som ett visningsexempel för tillfället.
-
         // Font and alignment settings.
+        help.setFont(new Font("century gothic", Font.BOLD, 15));
+        menu.setFont(new Font("century gothic", Font.BOLD, 15));
+        choiceNr1.setFont(new Font("century gothic", Font.BOLD, 24));
+        choiceNr2.setFont(new Font("century gothic", Font.BOLD, 24));
+        choiceNr3.setFont(new Font("century gothic", Font.BOLD, 24));
+        choiceNr4.setFont(new Font("century gothic", Font.BOLD, 24));
+        correctNumbersField.setFont(new Font("sans serif", Font.BOLD, 40));
         topLabel.setText("Spelet är igång! Ord nummer " + 1);
         topLabel.setFont(new Font("century gothic", Font.BOLD, 34));
         wordToTranslateLabel.setFont(new Font("century gothic", Font.BOLD, 24));
         topLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        correctNumbersField.setHorizontalAlignment(SwingConstants.CENTER);
         correctNumbersLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wordToTranslateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        wordToTranslate.setFont(new Font("century gothic", Font.BOLD, 34));
+        wordToTranslate.setHorizontalAlignment(SwingConstants.CENTER);
 
         //editable settings.
         wordToTranslate.setEditable(false);
         correctNumbersField.setEditable(false);
 
         //Addings.
-        //bubblePanel.add(Box.createRigidArea(new Dimension(280, 230)));
         bubblePanel.add(mascotBubble);
 
         wordToTranslateFieldPanel.add(wordToTranslate);
@@ -189,16 +178,14 @@ public class GameRun extends JPanel
         
 
         buttonPanel.add(choiceNr1);
-        //buttonPanel.add(Box.createRigidArea(new Dimension(60,90)));
         buttonPanel.add(choiceNr2);
-        //buttonPanel.add(Box.createRigidArea(new Dimension(60,40)));
         buttonPanel.add(choiceNr3);
-        //buttonPanel.add(Box.createRigidArea(new Dimension(60,40)));
         buttonPanel.add(choiceNr4);
-        //buttonPanel.add(Box.createRigidArea(new Dimension(60,40)));
         outerButtonPanel.add(buttonPanel);
         
         commitButtonPanel.add(commit);
+        
+        
 
         //Adds or removes components in GameRun panel(Don't you dare move it from this place!)
         if (level == 0)
@@ -224,6 +211,7 @@ public class GameRun extends JPanel
             leftPanel.add(Box.createRigidArea(new Dimension(65, 100)));
             leftPanel.add(Box.createRigidArea(new Dimension(540, 230)));
             leftPanel.add(bubblePanel);
+            
             updateUI();
 
         }
@@ -233,10 +221,11 @@ public class GameRun extends JPanel
             leftPanel.add(translateFieldLabel);
             leftPanel.add(translateField);
             leftPanel.add(commitButtonPanel);
+            
             updateUI();
         }
 
-        rightPanel.add(Box.createRigidArea(new Dimension(500, 160)));
+        rightPanel.add(Box.createRigidArea(new Dimension(500, 134)));
         rightPanel.add(progressbarLabel);
         rightPanel.add(progressBar);
         rightPanel.add(Box.createRigidArea(new Dimension(500, 100)));
@@ -245,16 +234,28 @@ public class GameRun extends JPanel
         rightPanel.add(Box.createRigidArea(new Dimension(500, 104)));
         rightPanel.add(help);
         rightPanel.add(menu);
-        rightPanel.add(fulKnappSomTasBort);
         rightPanel.add(mascotLabel);
 
         add(rightPanel, BorderLayout.LINE_END);
         add(leftPanel, BorderLayout.CENTER);
+        
+        
 
     }
     
     
-
+    public void prepForGamePlay(){
+        
+        listener.updateButtonsAndFields();
+     
+    }
+    
+    public void setFocusOnField(){
+        
+        
+        translateField.requestFocus(true);
+    }
+    
     
 
 }
